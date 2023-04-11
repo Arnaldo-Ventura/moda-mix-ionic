@@ -1,0 +1,33 @@
+<app-admin-header title="Localizar Produtos" class="ion-text-center" [buttonCloseModal]="true"></app-admin-header>
+<app-search-bar (inputKey)="onInput($event)" (inputEmpty)="reloadProducts()"></app-search-bar>
+<ion-content>
+  <ion-grid fixed>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" sizeSm="10">
+        <app-input-search (inputKey)="onInput($event)" [onFocus]="true" (inputEmpty)="reloadProducts()">
+        </app-input-search>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" class="ion-no-margin">
+        <ion-list>
+          <ion-item [color]="indexItemSelected===i?'light':null" *ngFor="let item of productList; let i=index"
+            (click)="selectProduct(i)">
+            <ion-thumbnail slot="start">
+              <img src="{{item.img?.length>0? item.img[0]: '../../../../../../assets/images/no_image.png'}}">
+            </ion-thumbnail>
+            <div class="group">
+              <ion-label>{{item.name}}</ion-label>
+              <ion-label>{{item.price |currency}}</ion-label>
+            </div>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadScrollData()">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Carregando mais categorias...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

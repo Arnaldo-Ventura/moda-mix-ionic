@@ -1,0 +1,52 @@
+ion-content {
+  --background: var(--ion-color-primary);
+}
+
+.rounded {
+  ion-item {
+    --border-radius: 10px;
+  }
+}
+
+.coupon {
+  background-color: white;
+  height: 70vh;
+  min-height: 70vh;
+  border-radius: 10px;
+  display: block;
+  overflow: auto;
+}
+.coupon::-webkit-scrollbar {
+  display: none;
+}
+.coupon {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.footer {
+  width: 100%;
+  box-shadow: 10px 10px 10px 1px var(--ion-color-primary);
+}
+
+.summary {
+  height: 62.3vh;
+  display: flex;
+  align-items: flex-end;
+}
+
+.method-input {
+  position: relative;
+}
+
+.method-group {
+  position: absolute;
+  top: 25px;
+  width: 100%;
+  z-index: 2;
+  ion-item {
+    --border-radius: 0;
+  }
+  ion-list {
+    border-radius: 0 0 10px 10px;
+  }
+}

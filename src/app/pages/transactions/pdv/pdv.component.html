@@ -1,0 +1,93 @@
+<ion-content>
+  <ion-grid fixed>
+    <ion-text color="light">
+      <h1 class="ion-text-center"><strong>Tela de Venda</strong></h1>
+    </ion-text>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" size-sm="6" class="ion-no-padding ion-padding-end">
+        <ion-row>
+          <ion-col size="3">
+            <form [formGroup]="formProd" class="rounded">
+              <ion-item lines=none>
+                <ion-label position="stacked">Qtd</ion-label>
+                <ion-input formControlName="qty" #qty type="number" [readonly]="readonlyQty"></ion-input>
+              </ion-item>
+            </form>
+          </ion-col>
+          <ion-col size="9">
+            <form [formGroup]="formBarCode" class="rounded">
+              <ion-item lines=none>
+                <ion-label position="stacked">Código</ion-label>
+                <ion-input formControlName="barCode" #barCode (ionFocus)="barCodeOnFocus()"
+                  [readonly]="readonlyCodeBar"></ion-input>
+              </ion-item>
+            </form>
+          </ion-col>
+        </ion-row>
+        <div class="summary">
+          <ion-row>
+            <ion-col size="4">
+              <div class="rounded">
+                <ion-item lines=none>
+                  <ion-label position="stacked">Itens</ion-label>
+                  <ion-input readonly>{{totalItems}}</ion-input>
+                </ion-item>
+              </div>
+            </ion-col>
+            <ion-col size="8">
+              <div class="rounded">
+                <ion-item lines=none>
+                  <ion-label position="stacked">Total Geral</ion-label>
+                  <ion-input readonly>{{totalTransactions |currency}}</ion-input>
+                </ion-item>
+              </div>
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-col>
+      <ion-col size="12" size-sm="6" class="ion-no-padding">
+        <ion-row>
+          <ion-col size="12">
+            <div class="coupon" #coupom>
+              <div *ngFor="let item of products; let i=index">
+                <ion-row class="ion-margin-bottom">
+                  <ion-col size="12">
+                    <p class="ion-no-margin">Item {{i+1}} - {{item.name.toLocaleUpperCase()}}</p>
+                  </ion-col>
+                  <ion-col size="4">
+                    <p class="ion-no-margin ion-text-start">{{item.qty}} x </p>
+                  </ion-col>
+                  <ion-col size="4">
+                    <p class="ion-no-margin ion-text-center">{{item.price|currency }} </p>
+                  </ion-col>
+                  <ion-col size="4">
+                    <p class="ion-no-margin ion-text-end">{{total(item.qty,item.price)|currency}}</p>
+                  </ion-col>
+                  <ion-col size="12" *ngIf="item.discount">
+                    <p class="ion-no-margin ion-text-end">Desconto - {{item.discount|currency}}</p>
+                  </ion-col>
+                </ion-row>
+              </div>
+            </div>
+          </ion-col>
+          <ion-row>
+          </ion-row>
+        </ion-row>
+      </ion-col>
+      <ion-row class="ion-content-justify-center footer">
+        <ion-col size="3">
+          <p class="ion-no-margin">Alterar Quant.: <strong>Q</strong></p>
+        </ion-col>
+        <ion-col size="3">
+          <p class="ion-no-margin">Ativar cod.: <strong>C</strong></p>
+        </ion-col>
+        <ion-col size="3">
+          <p class="ion-no-margin">Finalizar venda: <strong>F2</strong></p>
+        </ion-col>
+        <ion-col size="3">
+          <p class="ion-no-margin">Cancelar venda: <strong>F4</strong></p>
+        </ion-col>
+      </ion-row>
+    </ion-row>
+  </ion-grid>
+</ion-content>

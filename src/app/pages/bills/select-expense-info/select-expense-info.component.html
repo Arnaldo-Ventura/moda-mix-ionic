@@ -1,0 +1,36 @@
+<app-admin-header title="Informações de despesa" class="ion-text-center" [buttonCloseModal]="true">
+</app-admin-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-card>
+      <ion-row class="ion-justify-content-center">
+        <ion-text class="ion-margim-vertical">
+          <h3>Esse produto possui mais de uma classificação</h3>
+        </ion-text>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="10">
+          <ion-list>
+            <ion-radio-group #info name="auto">
+              <ion-list-header>
+                <ion-label>Selecione como classificar</ion-label>
+              </ion-list-header>
+              <ion-item *ngFor="let item of expenseInfo">
+                <ion-label>{{item.clas}} e {{item.account}}</ion-label>
+                <ion-radio [value]="{clas:item.clas, account:item.account}"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+          </ion-list>
+        </ion-col>
+        <ion-col size="10">
+          <ion-button (click)="onDismiss(info.value)" expand="block">
+            Selecionar
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </ion-grid>
+
+
+</ion-content>

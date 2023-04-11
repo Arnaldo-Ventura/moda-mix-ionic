@@ -1,0 +1,35 @@
+<app-admin-header title='Caixa' [buttonCloseModal]="true"></app-admin-header>
+<ion-content padding>
+  <ion-grid>
+    <ion-text class="ion-text-center">
+      <h2>Fechar Caixa</h2>
+    </ion-text>
+    <form [formGroup]="formulario">
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="7">
+          <ion-item class="ion-no-padding">
+            <ion-label position="floating">Valor Final</ion-label>
+            <ion-input appCurrency formControlName='final' (ionChange)="inputFinal()"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="7">
+          <ion-text class="ion-text-center">
+            <h2>Saldo {{balance | currency}}</h2>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+    </form>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="6" size-sm="6" size-md='4' class="ion-padding-top">
+        <ion-button color="light" expand="block" (click)="onDismissis()">
+          Cancelar
+        </ion-button>
+      </ion-col>
+      <ion-col size="6" size-sm="6" size-md='4' class="ion-padding-top">
+        <ion-button expand="block" [disabled]='formulario.invalid' (click)="submit()">
+          Fechar
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

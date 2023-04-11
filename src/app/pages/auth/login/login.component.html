@@ -1,0 +1,45 @@
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" sizeSm="9" sizeMd="8" sizeLg="5">
+        <ion-card>
+          <ion-row class="ion-justify-content-center image-logo">
+            <img src="../../../../assets/images/logo.png" alt="modamix">
+          </ion-row>
+          <ion-text class="ion-text-center">
+            <h1>Login</h1>
+          </ion-text>
+          <form [formGroup]='formulario' (ngSubmit)="submit()">
+            <ion-row class="ion-padding-horizontal">
+              <ion-col size="12" *ngIf="showUnits">
+                <ion-item class="ion-no-padding">
+                  <ion-label position="floating">Unidade</ion-label>
+                  <ion-select formControlName="unit" interface="popover">
+                    <ion-select-option *ngFor="let item of units" [value]="item">{{item}}</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+              <ion-col size="12">
+                <ion-item class="ion-no-padding">
+                  <ion-label position="floating">E-mail</ion-label>
+                  <ion-input type="email" formControlName='email'></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="12">
+                <ion-item class="ion-no-padding">
+                  <ion-label position="floating">Senha</ion-label>
+                  <ion-input type="password" formControlName="password"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="12" class="ion-margin-vertical ion-no-padding">
+                <ion-button class="ion-margin-vertical" expand="block" type="submit" [disabled]="formulario.invalid">
+                  Entrar
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </form>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,31 @@
+<app-admin-header title="Marcas"></app-admin-header>
+<app-search-bar (inputKey)='onInput($event)' (inputEmpty)='reloadMarca()'></app-search-bar>
+<ion-content>
+  <ion-grid fixed>
+    <ion-row class="ion-justify-content-center ion-align-items-end ion-no-margin ion-no-padding">
+      <ion-col class="ion-align-self-end ion-text-center" size="12" size-sm="4" size-md='3'>
+        <ion-button (click)="navegationForm()">
+          <ion-icon name="add"></ion-icon>Marca
+        </ion-button>
+      </ion-col>
+       <app-input-search (inputKey)='onInput($event)' (inputEmpty)='reloadMarca()'></app-input-search>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" size-sm='12' size-md='9' size-lg='8'>
+        <ion-list>
+          <ion-item *ngFor="let item of brandList">
+            <ion-label>{{item.name}}</ion-label>
+            <ion-icon color='dark' class="pointer" slot='small' slot="end" name="ellipsis-vertical-outline" (click)='selecionOption(item._id)' ></ion-icon>            
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadScrollData()">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Carregando mais categorias...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

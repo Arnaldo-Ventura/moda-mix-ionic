@@ -1,0 +1,14 @@
+<!-- <ion-row class="ion-justify-content-center ion-align-items-end ion-no-margin ion-no-padding"> -->
+<ion-col size="10" size-sm="7" size-md='5' size-lg='5' class="ion-hide-sm-down">
+  <form [formGroup]='form'>
+    <ion-item class="ion-no-padding">
+      <ion-label position="floating">{{label||'Buscar'}}</ion-label>
+      <ion-input type="text" #searchInput formControlName='pesq'></ion-input>
+      <ion-icon *ngIf="searchInput.value" size='small' class="ion-align-self-end pointer" slot='end'
+        name="close-outline" (click)="reloadAccounts()"></ion-icon>
+      <ion-icon *ngIf="!searchInput.value" size='small' class="ion-align-self-end" slot='end' name="search-outline">
+      </ion-icon>
+    </ion-item>
+  </form>
+</ion-col>
+<!-- </ion-row> -->

@@ -1,0 +1,38 @@
+<app-admin-header title='Adicionar'></app-admin-header>
+<ion-content padding>
+  <ion-grid >
+    <ion-text class="ion-text-center">
+      <h2>Cadastro Categorias</h2>
+    </ion-text>
+    <ion-card class="ion-padding">
+    <form [formGroup]="formulario">
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" size-sm="7" size-md="5">
+        <ion-item class="ion-no-padding">
+          <ion-label position="floating">Nome</ion-label>
+          <ion-input type="text" formControlName='name'></ion-input>          
+        </ion-item>
+      </ion-col>  
+      <ion-col size="12" size-sm="5" size-md="3">
+        <ion-item lines="none" class="ion-no-padding ion-margin-top">
+          <ion-label>Ativo</ion-label>
+          <ion-checkbox formControlName='active'></ion-checkbox>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </form>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="6" size-sm="4" class="ion-padding-top">        
+        <ion-button color="light" expand="block" routerLink='/admin/categorias'>
+          Voltar 
+        </ion-button>
+      </ion-col>
+      <ion-col size="6" size-sm="4" class="ion-padding-top">
+        <ion-button expand="block" [disabled]='formulario.invalid' (click)="submit()">
+          Salvar 
+        </ion-button>
+      </ion-col>
+    </ion-row>      
+  </ion-card>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,11 @@
+<app-admin-header title='Parcelas' [buttonCloseModal]=true></app-admin-header>
+<ion-content>
+  <ion-row>
+    <ion-col size="12">
+      <ion-item *ngFor="let txAnt of instalments; let i=index">
+        <ion-label>{{i+1}}x</ion-label>
+        <ion-label>{{txAnt/100 |percent:'0.2-5'}}</ion-label>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+</ion-content>

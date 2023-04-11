@@ -1,0 +1,165 @@
+<app-admin-header title='Adicionar' *ngIf="!isModal"></app-admin-header>
+<ion-header *ngIf="isModal">
+  <ion-toolbar>
+    <ion-title>
+      Adicionar Produto
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)='onDismiss()'>
+        <ion-icon name="close-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <ion-grid class="ion-no-padding ion-no-margin ion-margin-bottom">
+
+    <ion-text class="ion-text-center ion-no-margin">
+      <h2>Cadastro Produtos</h2>
+    </ion-text>
+    <ion-card class="ion-padding">
+      <form [formGroup]="formulario">
+        <ion-row class="ion-justify-content-center">
+          <ion-col size="12" size-sm="6" size-md="4" class="ion-padding-horizontal">
+            <ion-item class="ion-no-padding">
+              <ion-label position="floating">Categoria</ion-label>
+              <ion-select formControlName='cat' multiple='true'>
+                <ion-select-option *ngFor="let item of categoryList" [value]="item.name">
+                  {{item.name}}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12" size-sm="6" size-md="4" class="ion-padding-horizontal">
+            <ion-item class="ion-no-padding">
+              <ion-label position="floating">Marca</ion-label>
+              <ion-select formControlName='brand'>
+                <ion-select-option *ngFor="let item of brandList" [value]="item.name">{{item.name}}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12" size-sm="6" size-md="4" class="ion-padding-horizontal">
+            <ion-item class="ion-no-padding">
+              <ion-label position="floating">Nome</ion-label>
+              <ion-input type="text" formControlName='name'></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12" size-sm="6" size-md="4" class="ion-padding-horizontal">
+            <ion-item class="ion-no-padding">
+              <ion-label position="floating">Preço R$</ion-label>
+              <ion-input formControlName="price"
+                [brmasker]="{ money: true, thousand: '.',  decimalCaracter: ',', decimal: 2}">
+              </ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="5" size-sm="5" size-md="4" class="ion-padding-horizontal">
+            <ion-item lines="none">
+              <ion-label>Ativo</ion-label>
+              <ion-checkbox formControlName='active'></ion-checkbox>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12" size-sm="6" size-md="4" class="ion-padding-horizontal">
+            <ion-item class="ion-no-padding">
+              <ion-label position="floating">Código</ion-label>
+              <ion-input type="text" formControlName='barCode'></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12" size-sm="6" size-md="4" size-lg="3" class="ion-padding-horizontal">
+            <ion-item class="ion-no-padding">
+              <ion-label position="floating">Tipo</ion-label>
+              <ion-select okText="OK" cancelText="Cancelar" interface="alert" multiple='true' formControlName='type'>
+                <ion-select-option *ngFor="let item of typeList" [value]="item.value">{{item.name}}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <div *ngIf="formulario.value.type.includes('i')">
+          <ion-col size="12">
+            <ion-text class="ion-text-center ion-no-margin">
+              <h3>Informações do tipo receita</h3>
+            </ion-text>
+          </ion-col>
+          <div formArrayName='incomeInfo'
+            *ngFor="let incomeInfo of formulario.get('incomeInfo')['controls']; let i = index">
+            <ion-row [formGroupName]='i' class="ion-justify-content-center">
+              <ion-col size="12" size-sm="6" size-md="4" class="ion-padding-horizontal">
+                <ion-item class="ion-no-padding">
+                  <ion-label position="floating">Classificação</ion-label>
+                  <ion-select interface="popover" formControlName='clas'>
+                    <ion-select-option *ngFor="let item of filterClassification('i')" [value]="item.name">{{item.name}}
+                    </ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+              <ion-col size="12" size-sm="6" size-md="4" class="ion-padding-horizontal">
+                <ion-item class="ion-no-padding">
+                  <ion-label position="floating">Conta</ion-label>
+                  <ion-select interface="popover" formControlName='account'>
+                    <ion-select-option *ngFor="let item of filterAccount('i')" [value]="item.name">
+                      {{item.name}}
+                    </ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </div>
+        </div>
+        <div *ngIf="formulario.value.type.includes('e')">
+          <ion-col size="12">
+            <ion-text class="ion-text-center ion-no-margin">
+              <h3>Informações do tipo despesa</h3>
+            </ion-text>
+          </ion-col>
+          <div formArrayName='expenseInfo'
+            *ngFor="let expenseInfo of formulario.get('expenseInfo')['controls']; let i = index">
+            <ion-row [formGroupName]='i' class="ion-justify-content-center">
+              <ion-col size="12" size-sm="5" size-md="5" class="ion-padding-horizontal">
+                <ion-item class="ion-no-padding">
+                  <ion-label position="floating">Classificação</ion-label>
+                  <ion-select interface="popover" formControlName='clas'>
+                    <ion-select-option *ngFor="let item of filterClassification('e')" [value]="item.name">{{item.name}}
+                    </ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+              <ion-col size="12" size-sm="5" size-md="5" class="ion-padding-horizontal">
+                <ion-item class="ion-no-padding">
+                  <ion-label position="floating">Conta</ion-label>
+                  <ion-select interface="popover" formControlName='account'>
+                    <ion-select-option *ngFor="let item of filterAccount('e')" [value]="item.name">
+                      {{item.name}}
+                    </ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+              <div size="12" size-sm="2" size-md="2" class="ion-align-self-center">
+                <ion-fab-button *ngIf="showButtonAddExpense(i)" size="small" color='primary' (click)="addExpenseInfo()">
+                  <ion-icon name="add"></ion-icon>
+                </ion-fab-button>
+                <ion-fab-button *ngIf="showButtonRemoveExpense(i)" size="small" color='danger'
+                  (click)="removeExpenseInfo(i)">
+                  <ion-icon name="remove"></ion-icon>
+                </ion-fab-button>
+              </div>
+            </ion-row>
+          </div>
+        </div>
+      </form>
+      <ion-row class="ion-justify-content-center ion-margin-vertical ion-padding-horizontal">
+        <ion-col size="6" size-sm="6" size-md="5">
+          <ion-button color="light" expand="block" (click)='back()'>
+            Voltar
+          </ion-button>
+        </ion-col>
+        <ion-col size="6" size-sm="6" size-md="5">
+          <ion-button expand="block" [disabled]='formulario.invalid' (click)="submit()">
+            Salvar
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </ion-grid>
+</ion-content>

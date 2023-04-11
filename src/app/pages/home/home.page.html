@@ -1,0 +1,111 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Moda Mix
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="modalCart()" class="notification-icon-button">
+        <ion-badge class="notification-badge" color='danger' *ngIf="cart>0">{{cart}}</ion-badge>
+        <ion-icon slot="icon-only" name="cart-sharp"></ion-icon>
+      </ion-button>
+      <ion-button routerLink='/auth/login' *ngIf="!idUserAuthenticated">
+        <ion-icon slot="icon-only" name="log-in"></ion-icon>
+      </ion-button>
+      <ion-button (click)="logout()" *ngIf="idUserAuthenticated">
+        <ion-icon slot="icon-only" name="log-out"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-slides class="slides" pager="true" [options]='slideBannerOpts'>
+        <ion-slide *ngFor="let item of bannersProducts" (click)="bannerClick(item._id)">
+          <img src={{item.imgSlide}} class="pointer">
+        </ion-slide>
+      </ion-slides>
+    </ion-row>
+
+    <ion-row class="ion-margin-vertical">
+      <ion-slides class="slides" pager="false" [options]='slideCategoriesOpts'>
+        <ion-slide *ngFor="let item of categories" (click)="categoryClick(item._id)">
+          <div class="slideButton">
+            <ion-button expand="full" shape="round" color='medium'>
+              {{item.name}}
+            </ion-button>
+          </div>
+
+        </ion-slide>
+      </ion-slides>
+
+    </ion-row>
+   
+    <!-- <ion-row class="ion-justify-content-center">
+      <ion-col size="12" size-sm='6' size-md='4' size-lg='4'>
+        <ion-card class="ion-no-margin">
+          <ion-list>
+            <ion-item class="ion-no-padding">
+              <img src="http://localhost:3000/files/1589990248852.jpeg">
+              <div class="prod-info">
+                <div class="title-info">
+                  <ion-label class="ion-text-wrap ion-no-margin"><strong>Saia Longa de bolinha</strong></ion-label>
+                  <p class="ion-no-margin"><small>Unit: {{100 | currency:'BRL':'symbol-narrow':'1.2-2'}}</small></p>
+                  <p class="ion-no-margin"><small>qty: 2</small></p>
+                </div>
+                <div class="total-info">
+                  <ion-label>Total: {{200| currency:'BRL':'symbol-narrow':'1.2-2'}}</ion-label>
+                </div>
+              </div>
+              <ion-buttons slot="end" (click)="onDismiss(item)">
+              <ion-icon slot="icon-only" class="icon-check" name="checkmark-outline"></ion-icon>
+            </ion-buttons>
+
+            </ion-item>
+            <ion-item lines='none'>
+              <ion-buttons slot="start">
+                <ion-button>
+                  <ion-icon slot="icon-only" name="remove"></ion-icon>
+                </ion-button>
+                <ion-button>
+                  <ion-icon slot="icon-only" name="add"></ion-icon>
+                </ion-button>
+              </ion-buttons>
+              <ion-buttons slot="end">
+                <ion-button>
+                  <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+                </ion-button>
+              </ion-buttons>
+            </ion-item>
+          </ion-list>
+        </ion-card>
+      </ion-col>
+    </ion-row> -->
+    
+    <ion-row>
+      <ion-col size="6" size-sm='4' size-md='3' size-xl='2' *ngFor="let item of cards">
+        <ion-card class="no-padding ion-no-margin cardProduct">
+          <img class="pointer" (click)="productDetail(item._id)" src={{item.img[0]}} alt={{item.name}}>
+          <ion-card-header class="ion-text-center ion-no-margin ion-no-padding">
+            <h6 class="ion-no-margin"><strong>{{item.name}}</strong></h6>
+            <ion-card-subtitle>{{item.price | currency:'BRL':'symbol-narrow':'1.2-2' }}</ion-card-subtitle>
+            <ion-row class="ion-justify-content-center">
+              <ion-buttons>
+                <ion-button (click)="clickLike(item._id)" *ngIf="!item.likes.includes(idUserAuthenticated)">                 
+                  <ion-icon slot="start" name="heart-outline" color='danger'></ion-icon>
+                  <p class="heart">{{item.likes?.length}}</p>
+                </ion-button>
+                <ion-button (click)="clickDislike(item._id)" *ngIf="item.likes.includes(idUserAuthenticated)">
+                  <ion-icon slot="start" name="heart" color='danger'></ion-icon>                 
+                  <p class="heart">{{item.likes?.length}}</p>
+                </ion-button>
+              </ion-buttons>
+            </ion-row>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

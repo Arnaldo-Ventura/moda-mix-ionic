@@ -1,0 +1,122 @@
+<app-admin-header title='Adicionar Cartão' [buttonCloseModal]=true></app-admin-header>
+<ion-content padding>
+  <div class="container">
+    <ion-grid>
+      <ion-text class="ion-text-center">
+        <h2>Adicionar cartão</h2>
+      </ion-text>
+      <form [formGroup]="formulario">
+        <ion-card class="ion-padding">
+          <ion-row class="ion-justify-content-center">
+            <ion-col size="12" size-sm="5" size-md="5">
+              <ion-item class="ion-no-padding">
+                <ion-label position="floating">Cartão</ion-label>
+                <ion-select formControlName="card" interface="popover">
+                  <ion-select-option *ngFor="let item of cardList" [value]="{_id:item._id, name:item.name}">
+                    {{item.name}}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row formGroupName='debit' class="ion-justify-content-center">
+            <ion-col size="12" size-sm="4" size-md="4">
+              <ion-item class="ion-no-padding">
+                <ion-label position="floating">Taxa Débito</ion-label>
+                <ion-input type="text" formControlName="rate" [brmasker]="{ mask:'0,00', len:5, type:'num'}">
+                </ion-input>
+                <ion-icon slot="end">+</ion-icon>
+              </ion-item>
+            </ion-col>
+            <ion-col size="12" size-sm="4" size-md="4">
+              <ion-item class="ion-no-padding">
+                <ion-label position="floating">Recebe em (dias)</ion-label>
+                <ion-input type="number" formControlName="expected"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="12" size-sm="4" size-md="4">
+              <ion-item class="ion-no-padding">
+                <ion-label position="floating">Taxa Mínima</ion-label>
+                <ion-input formControlName="minValue"
+                  [brmasker]="{ money: true, thousand: '.',  decimalCaracter: ',', decimal: 2, type:'num'}"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row formGroupName='credit' class="ion-justify-content-center">
+            <ion-col size="12" size-sm="4" size-md="4">
+              <ion-item class="ion-no-padding">
+                <ion-label position="floating">Taxa Crédito</ion-label>
+                <ion-input type="text" formControlName="rate" [brmasker]="{ mask:'0,00', len:5, type:'num'}">
+                </ion-input>
+                <ion-icon slot="end">+</ion-icon>
+              </ion-item>
+            </ion-col>
+            <ion-col size="12" size-sm="4" size-md="4">
+              <ion-item class="ion-no-padding">
+                <ion-label position="floating">Recebe em (dias)</ion-label>
+                <ion-input type="number" formControlName="expected"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="12" size-sm="4" size-md="4">
+              <ion-item class="ion-no-padding">
+                <ion-label position="floating">Taxa Mínima</ion-label>
+                <ion-input formControlName="minValue"
+                  [brmasker]="{ money: true, thousand: '.',  decimalCaracter: ',', decimal: 2, type:'num'}"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+        <ion-card class="ion-padding">
+          <div formGroupName='ant'>
+            <ion-row class="ion-justify-content-center">
+              <ion-col size="12" size-sm="6">
+                <ion-item lines="none" class="ion-no-padding">
+                  <ion-label>Antecipação automática?</ion-label>
+                  <ion-checkbox formControlName="auto"></ion-checkbox>
+                </ion-item>
+              </ion-col>
+              <ion-col size="12" size-sm="6">
+                <ion-item class="ion-no-padding">
+                  <ion-label position="floating">Recebe em (dias)</ion-label>
+                  <ion-input type="number" formControlName="expected"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <div formArrayName="inst">
+              <ion-text class="ion-text-center">
+                <h2>Taxas de Antecipação</h2>
+              </ion-text>
+              <ion-row class="ion-justify-content-center">
+                <ion-col size="3" size-sm="3" size-md="2" *ngFor="let item of instalments; let instalment=index">
+                  <ion-item class="ion-no-padding">
+                    <ion-label position="floating">{{instalment+1}}x</ion-label>
+                    <ion-input formControlName={{instalment}} [brmasker]="{ mask:'0,00', len:4, type:'num'}">
+                    </ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </div>
+          </div>
+          <ion-col size="12" size-sm="6">
+            <ion-item lines="none" class="ion-no-padding">
+              <ion-label>Arredondamento na 1º parcela</ion-label>
+              <ion-checkbox formControlName="roundFirstInt"></ion-checkbox>
+            </ion-item>
+          </ion-col>
+        </ion-card>
+      </form>
+      <ion-row class="ion-justify-content-center ion-margin-top">
+        <ion-col size="6" size-sm="4" size-md="4">
+          <ion-button color="light" expand="block" (click)="submit()">
+            Cancelar
+          </ion-button>
+        </ion-col>
+        <ion-col size="6" size-sm="4" size-md="4">
+          <ion-button expand="block" [disabled]='formulario.invalid' (click)="submit(true)">
+            Salvar
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

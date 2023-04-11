@@ -1,0 +1,10 @@
+.listItemsAdded{
+    
+    ion-item:last-child{
+        --border-style:none;
+    }
+}
+
+.addBorderBotton{
+    border-bottom: 1px solid lightgray;
+}

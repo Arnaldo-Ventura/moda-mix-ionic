@@ -1,0 +1,19 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar [color]="color">
+    <ion-buttons slot="start" *ngIf="!buttonCloseModal">
+      <ion-menu-button autoHide="false" contentId='main'></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      {{title}}
+    </ion-title>
+    <ion-buttons slot="end" *ngIf="buttonCloseModal">
+      <ion-button (click)='onDismiss()'>
+        <ion-icon name="close-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end" *ngIf="!buttonCloseModal">
+      <ion-text class="userLogged" color="light" (click)="openProfileMenu()">{{userLogged}}
+      </ion-text>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>

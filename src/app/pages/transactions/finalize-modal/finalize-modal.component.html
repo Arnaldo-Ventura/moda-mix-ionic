@@ -1,0 +1,81 @@
+<ion-content color='primary'>
+  <ion-grid fixed>
+    <ion-text color="light">
+      <h1 class="ion-text-center"><strong>Finalizar Venda</strong></h1>
+    </ion-text>
+    <ion-text color="light">
+      <h1 class="ion-text-center ion-no-margin ion-margin-bottom"><strong>Total {{total|currency}}</strong></h1>
+    </ion-text>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="6" size-md="3">
+        <ion-button color="success" expand="block" (click)="addPay('ca')">Dinheiro</ion-button>
+      </ion-col>
+      <ion-col size="6" size-md="3">
+        <ion-button color="secondary" expand="block" (click)="addPay('px')">Pix</ion-button>
+      </ion-col>
+      <ion-col size="6" size-md="3">
+        <ion-button color="medium" expand="block" (click)="addPay('dc')">Débito</ion-button>
+      </ion-col>
+      <ion-col size="6" size-md="3">
+        <ion-button color="light" expand="block" (click)="addPay('cc')">Crédito</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <div class='pays-method'>
+        <ion-row class="ion-justify-content-around">
+          <ion-item-divider>
+            <ion-col class="ion-text-center">
+              <h5 class="ion-no-margin">Forma</h5>
+            </ion-col>
+            <ion-col class="ion-text-center">
+              <h5 class="ion-no-margin">Valor</h5>
+            </ion-col>
+            <ion-col class="ion-text-center" *ngIf="includesMethod('ca')">
+              <h5 class="ion-no-margin">Dinheiro</h5>
+            </ion-col>
+            <ion-col class="ion-text-center" *ngIf="includesMethod('ca')">
+              <h5 class="ion-no-margin">Troco</h5>
+            </ion-col>
+            <ion-col class="ion-text-center" *ngIf="(includesMethod('cc')||includesMethod('dc')) && type==='i'">
+              <h5 class="ion-no-margin">Operadora</h5>
+            </ion-col>
+            <ion-col class="ion-text-center" *ngIf="includesMethod('cc')||includesMethod('dc')">
+              <h5 class="ion-no-margin">Cartão</h5>
+            </ion-col>
+            <ion-col class="ion-text-center" *ngIf="includesMethod('cc')">
+              <h5 class="ion-no-margin">Parc.</h5>
+            </ion-col>
+          </ion-item-divider>
+          <ion-item-divider *ngFor="let item of payInfoList; let i=index">
+            <ion-col class="ion-text-center">
+              <h5 class="ion-no-margin">{{methodPayName(item.method)}}</h5>
+            </ion-col>
+            <ion-col class="ion-text-center">
+              <h5 class="ion-no-margin">{{item.amount|currency}}</h5>
+            </ion-col>
+            <ion-col class="ion-text-center" *ngIf="includesMethod('ca')">
+              <h5 class="ion-no-margin">{{item.cash|currency}}</h5>
+            </ion-col>
+            <ion-col class="ion-text-center" *ngIf="includesMethod('ca')">
+              <h5 class="ion-no-margin">{{item.change|currency}}</h5>
+            </ion-col>
+            <ion-col class="ion-text-center" *ngIf="(includesMethod('cc')||includesMethod('dc'))&& type==='i'">
+              <h5 class="ion-no-margin">{{item.infoCard?.operator?.name}}</h5>
+            </ion-col>
+            <ion-col class="ion-text-center" *ngIf="includesMethod('cc')||includesMethod('dc')">
+              <h5 class="ion-no-margin">{{item.infoCard?.card?.name}}</h5>
+            </ion-col>
+            <ion-col class="ion-text-center" *ngIf="includesMethod('cc')">
+              <h5 class="ion-no-margin">{{item.infoCard?.installs}}</h5>
+            </ion-col>
+          </ion-item-divider>
+        </ion-row>
+      </div>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col>
+        <ion-button color="dark" expand="block" (click)="confirmOperation()">Finalizar Pagamento</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

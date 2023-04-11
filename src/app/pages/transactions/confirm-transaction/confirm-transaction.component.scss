@@ -1,0 +1,15 @@
+.header-list {
+  ion-item:last-child {
+    --border-style: none;
+  }
+  ion-label {
+    margin: 4px 10px;
+  }
+
+  ion-icon {
+    margin: 0px 22px;
+  }
+  img {
+    margin: 0px 22px;
+  }
+}

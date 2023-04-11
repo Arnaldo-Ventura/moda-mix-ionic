@@ -1,0 +1,18 @@
+.list-searched {
+  position: relative;
+  border: 1px solid #d3d3d3;
+  box-shadow: 8px 4px 4px #d3d3d3;
+  max-height: 230px;
+  border-radius: 0 0 6px 6px;
+  overflow: auto;
+  ion-item:last-child {
+    --border-style: none;
+  }
+}
+.list-searched::-webkit-scrollbar {
+  display: none;
+}
+.list-searched {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}

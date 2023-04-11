@@ -1,0 +1,73 @@
+<ion-content color='primary'>
+  <ion-grid fixed>
+    <ion-text color="light">
+      <h1 class="ion-text-center"><strong>Pagamento em {{methodName}}</strong></h1>
+    </ion-text>
+    <ion-text color="light">
+      <h1 class="ion-text-center"><strong>Valor a pagar {{amount|currency}}</strong></h1>
+    </ion-text>
+    <form [formGroup]='formulario'>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="6" class="ion-margin-bottom">
+          <ion-item lines=none>
+            <ion-label position="stacked">Valor</ion-label>
+            <ion-input formControlName='amount' appCurrency #inputAmount (ionChange)="inputValue($event)">
+            </ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-center" *ngIf="method==='ca'">
+        <ion-col size="6" class="ion-margin-bottom">
+          <ion-item lines=none>
+            <ion-label position="stacked">Dinheiro</ion-label>
+            <ion-input formControlName='cash' appCurrency #cash (ionChange)="inputCash($event)"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-center" *ngIf="method==='ca'">
+        <ion-col size="6" class="ion-margin-bottom">
+          <ion-item lines=none>
+            <ion-label position="stacked">Troco</ion-label>
+            <ion-input formControlName='change' readonly=true></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-center" *ngIf="(method==='dc'|| method==='cc')&& type==='i'">
+        <ion-col size="6" class="ion-margin-bottom">
+          <app-input-group-items [items]="operators" [group]="groupOperators" label="Operadora"
+            [inputValue]='initialOperator' (itemChanged)="loadCardsIncome($event)"
+            (itemsVisible)="itemsVisible($event)">
+          </app-input-group-items>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-center" *ngIf="(showCards && method==='dc'|| method==='cc') && type==='i'">
+        <ion-col size="6" class="ion-margin-bottom">
+          <app-input-group-items [items]="cardsIncome" label="Cartão" [group]="groupCards"
+            (itemChanged)="selectedCard($event)" (itemsVisible)="itemsVisible($event)">
+          </app-input-group-items>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-center" *ngIf="method==='dc'|| method==='cc' && type==='e'">
+        <ion-col size="6" class="ion-margin-bottom">
+          <app-input-group-items [items]="cardsExpense" label="Cartão" [group]="groupCards"
+            (itemChanged)="selectedCard($event)" (itemsVisible)="itemsVisible($event)">
+          </app-input-group-items>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-center" *ngIf="showinsts && (method==='dc'|| method==='cc')">
+        <ion-col size="6">
+          <ion-item lines=none>
+            <ion-label position="stacked">Parcelas</ion-label>
+            <ion-input type='number' formControlName='installs' #inst (ionChange)="changeInst()">
+            </ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </form>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="6">
+        <ion-button color="light" expand="block" (click)="submit()">Adicionar Pagamento</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

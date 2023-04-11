@@ -1,0 +1,57 @@
+<ion-content color='primary'>
+  <ion-grid fixed>
+    <ion-text color="light">
+      <h1 class="ion-text-center"><strong>Aplicar Desconto</strong></h1>
+      <h6 class="ion-text-center" *ngIf="!totalDiscount && !individualDiscount">Nenhum desconto aplicado ou desconto
+        inferior a {{0.01 | currency}}</h6>
+    </ion-text>
+    <ion-text color="light" *ngIf="formulario.value.discount==='g' && totalDiscount">
+      <h3 class="ion-text-center"><strong>Total de {{totalDiscount|currency}}</strong></h3>
+    </ion-text>
+    <ion-text color="light" *ngIf="formulario.value.discount==='i' && individualDiscount">
+      <h3 class="ion-text-center">De {{individualDiscount|currency}} Ao item {{formulario.value.item}}
+        ({{productValue|currency}})</h3>
+    </ion-text>
+    <form [formGroup]='formulario'>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="6" class="ion-margin-vertical">
+          <app-input-group-items [items]="discounts" [group]="false" label="Desconto" inputValue='Individual'
+            (itemChanged)="discountChange($event)" (itemsVisible)="itemsVisible($event)">
+          </app-input-group-items>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="6" class="ion-margin-bottom">
+          <app-input-group-items [items]="types" [group]="false" label="Tipo de desconto" inputValue='Valor'
+            (itemChanged)="typeDiscountChange($event)" (itemsVisible)="itemsVisible($event)">
+          </app-input-group-items>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="formulario.value.discount==='i'" class="ion-justify-content-center">
+        <ion-col size="6" class="ion-margin-bottom">
+          <ion-item lines=none>
+            <ion-label position="stacked">Item</ion-label>
+            <ion-input type="number" formControlName='item' #item (ionChange)="inputItem($event)">
+            </ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="formulario.value.type==='v'" class="ion-justify-content-center">
+        <ion-col size="6" class="ion-margin-bottom">
+          <ion-item lines=none>
+            <ion-label position="stacked">Valor do desconto</ion-label>
+            <ion-input formControlName='cash' appCurrency #cash (ionChange)="inputCash()"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="formulario.value.type==='p'" class="ion-justify-content-center">
+        <ion-col size="6" class="ion-margin-bottom">
+          <ion-item lines=none>
+            <ion-label position="stacked">Percentual</ion-label>
+            <ion-input formControlName='percent' appPercent #percent (ionChange)="inputPercent()"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-grid>
+</ion-content>

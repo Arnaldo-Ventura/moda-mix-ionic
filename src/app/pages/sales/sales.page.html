@@ -1,0 +1,96 @@
+<app-admin-header title={{title}}></app-admin-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-justify-content-center ion-align-items-end">
+      <ion-col size="12" size-sm='12' size-md='9' size-lg='6'>
+        <ion-text class="ion-text-center">
+          <h2>Lançar {{title}}</h2>
+        </ion-text>
+        <ion-card class="padding-card ion-no-margin">
+          <form [formGroup]="formulario">
+            <ion-row class="ion-justify-content-center" formGroupName='prod'>
+              <ion-col size="12" size-sm="6" size-md="6">
+                <ion-item class="ion-no-padding">
+                  <ion-label position="floating">Produto</ion-label>
+                  <ion-input type="text" formControlName='name' readonly (ionFocus)="presentModalProducts()">
+                  </ion-input>
+                  <ion-icon class="ion-padding-top" slot="end" name="search">
+                  </ion-icon>
+                </ion-item>
+              </ion-col>
+              <ion-col size="3" size-sm="3" size-md="3">
+                <ion-item class="ion-no-padding">
+                  <ion-label position="floating">Qtd</ion-label>
+                  <ion-input type="number" formControlName="qty" (input)="calculateTotalProd($event)"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="4" size-sm="4" size-md="4">
+                <ion-item class="ion-no-padding">
+                  <ion-label position="floating">R$ Unit</ion-label>
+                  <ion-input formControlName='price' (input)="calculateTotalInputPrice($event)" [readonly]="type==='i'">
+                  </ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="5" size-sm="5" size-md="5">
+                <ion-item class="ion-no-padding">
+                  <ion-label position="floating">Total R$</ion-label>
+                  <ion-input readonly [value]='totalProd'>
+                  </ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="6" size-sm="6" size-md="4">
+                <ion-button (click)="addProductToList()" expand="block" [disabled]="formulario.invalid">
+                  Adicionar <ion-icon slot="start" name="add"></ion-icon>
+                </ion-button>
+              </ion-col>
+              <ion-col size="6" size-sm="6" size-md="4">
+                <ion-button (click)="clearFormProd()" expand="block" color="light"
+                  [disabled]='!formulario.value.prod.name'>
+                  Produto <ion-icon slot="start" name="close-outline"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </form>
+        </ion-card>
+      </ion-col>
+      <ion-col size="12" size-sm='12' size-md='9' size-lg='6' *ngIf="(products|async).length>0">
+        <ion-card class="ion-no-margin listItemsAdded">
+          <ion-row class="ion-justify-content-center addBorderBotton">
+            <ion-col size="12">
+              <ion-item class="ion-text-center">
+                <ion-label class="ion-text-wrap">
+                  Total Venda: {{totalOrder() | currency:'BRL':'symbol-narrow':'1.2-2'}}
+                </ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col size="6" size-sm="5" size-md="6" size-lg="5">
+              <ion-button (click)="submit()" expand="block" [disabled]="(products|async).length<=0">finalizar
+              </ion-button>
+            </ion-col>
+            <ion-col (click)="clearOrder()" size="6" size-sm="5" size-md="6" size-lg="5">
+              <ion-button expand="block" color="danger" [disabled]="(products|async).length<=0">Cancelar</ion-button>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col class="ion-no-margin">
+              <ion-list>
+                <ion-item *ngFor="let item of (products |async); let i = index">
+                  <div>
+                    <ion-label><strong>{{item.prod.name}}</strong></ion-label>
+                    <ion-label><small>{{item.prod.qty}} X
+                        {{item.prod.price | currency:'BRL':'symbol-narrow':'1.2-2'}}</small></ion-label>
+                  </div>
+                  <ion-buttons slot="end" (click)="deleteProdFromList(i)">
+                    <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+                  </ion-buttons>
+                </ion-item>
+              </ion-list>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

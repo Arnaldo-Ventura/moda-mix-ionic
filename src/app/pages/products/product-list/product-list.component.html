@@ -1,0 +1,33 @@
+<app-admin-header title="Produtos"></app-admin-header>
+<app-search-bar (inputKey)="onInput($event)" (inputEmpty)="reloadProducts()"></app-search-bar>
+<ion-content>
+  <ion-grid fixed>
+    <ion-row class="ion-justify-content-center ion-align-items-end ion-no-margin ion-no-padding">
+      <ion-col class="ion-align-self-end ion-text-center" size="12" size-sm="4" size-md='3'>
+        <ion-button (click)="productForm()">
+          <ion-icon name="add"></ion-icon>Produto
+        </ion-button>
+      </ion-col>
+     <app-input-search (inputKey)="onInput($event)" (inputEmpty)="reloadProducts()"></app-input-search>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" size-sm='12' size-md='9' size-lg='8'>
+        <ion-list>
+          <ion-item *ngFor="let item of productList">
+            <ion-thumbnail slot="start">
+              <img src="{{item.img?.length>0? item.img[0]: '../../../../../../assets/images/no_image.png'}}">
+            </ion-thumbnail>
+            <ion-label>{{item.name}}</ion-label>
+            <ion-icon color='dark' class="pointer" slot='small' slot="end" name="ellipsis-vertical-outline"
+              (click)='selecionOption(item._id)'></ion-icon>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadScrollData()">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Carregando mais categorias...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

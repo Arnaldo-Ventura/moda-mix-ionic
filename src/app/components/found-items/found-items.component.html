@@ -1,0 +1,7 @@
+<div class="list-searched pointer" *ngIf="visible">
+  <ion-list>
+    <ion-item *ngFor="let item of list" (click)="onSelect(item)">
+      <ion-label>{{item.name}}</ion-label>
+    </ion-item>
+  </ion-list>
+</div>

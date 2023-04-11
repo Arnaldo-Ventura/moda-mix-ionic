@@ -1,0 +1,202 @@
+<app-admin-header title='Confirmações de Pagamento'></app-admin-header>
+
+<ion-content>
+  <ion-row class="ion-justify-content-center ion-margin-top">
+    <!--  <ion-col size="12" size-md='10' class="ion-no-padding">
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="4">
+          <ion-card class="ion-no-margin ion-padding-vertical" color="success">
+            <ion-row class="ion-justify-content-center">
+              <ion-label class="ion-text-center">
+                <h2><strong>Receita</strong></h2>
+                <h3>{{totalCards.income || 0|currency:'BRL'}}</h3>
+              </ion-label>
+            </ion-row>
+          </ion-card>
+        </ion-col>
+        <ion-col size="4">
+          <ion-card class="ion-no-margin ion-padding-vertical" color="danger">
+            <ion-row class="ion-justify-content-center">
+              <ion-label class="ion-text-center">
+                <h2><strong>Despesa</strong></h2>
+                <h3>{{totalCards.expense || 0|currency:'BRL'}}</h3>
+              </ion-label>
+            </ion-row>
+          </ion-card>
+        </ion-col>
+        <ion-col size="4">
+          <ion-card class="ion-no-margin ion-padding-vertical" color="secondary">
+            <ion-row class="ion-justify-content-center">
+              <ion-label class="ion-text-center">
+                <h2><strong>Saldo</strong></h2>
+                <h3>{{totalCards.balace || 0|currency:'BRL'}}</h3>
+              </ion-label>
+            </ion-row>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-col> -->
+    <ion-col size="12" size-md='10'>
+      <ion-card class="ion-no-margin ion-padding-bottom ion-padding-horizontal">
+        <ion-row class="ion-justify-content-center ion-no-margin ion-no-padding">
+          <ion-col class="ion-no-margin ion-no-padding">
+            <ion-text class="ion-text-center">
+              <h4>Filtros</h4>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+        <form [formGroup]="formulario">
+          <ion-row class="ion-justify-content-around">
+            <ion-col size="6" size-sm="6" sizeMd="3">
+              <ion-item class="ion-no-padding" id="date-from">
+                <ion-label position="floating">Data inicial</ion-label>
+                <ion-input readonly="true" formControlName="from" (ionChange)="loadtransactionToConfirm()"></ion-input>
+              </ion-item>
+              <ion-popover trigger="date-from" show-backdrop="true">
+                <ng-template>
+                  <ion-datetime #from size="cover" presentation="date" (ionChange)="dateFromChange(from.value)"
+                    [value]="fromDateValue">
+                  </ion-datetime>
+                </ng-template>
+              </ion-popover>
+            </ion-col>
+            <ion-col size="6" size-sm="6" sizeMd="3">
+              <ion-item class="ion-no-padding" id="date-to">
+                <ion-label position="floating">Data final</ion-label>
+                <ion-input readonly="true" formControlName="to" (ionChange)="loadtransactionToConfirm()"></ion-input>
+              </ion-item>
+              <ion-popover trigger="date-to" show-backdrop="false">
+                <ng-template>
+                  <ion-datetime #to size="cover" presentation="date" (ionChange)="dateToChange(to.value)"
+                    [value]="toDateValue">
+                  </ion-datetime>
+                </ng-template>
+              </ion-popover>
+            </ion-col>
+            <ion-col size="6" size-sm="6" sizeMd="3" *ngIf="unitList.length>1">
+              <ion-item class="ion-no-padding">
+                <ion-label position="floating">Unidade</ion-label>
+                <ion-select interface="popover" formControlName='unit' (ionChange)="loadtransactionToConfirm()">
+                  <ion-select-option [value]='item' *ngFor="let item of unitList">{{item}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            <ion-col size="6" size-sm="6" sizeMd="3">
+              <ion-item class="ion-no-padding">
+                <ion-label position="floating">Tipo</ion-label>
+                <ion-select interface="popover" formControlName='type' (ionChange)="loadtransactionToConfirm()">
+                  <ion-select-option [value]='item.value' *ngFor="let item of typeList">{{item.name}}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            <!-- <ion-col size="6" size-sm="4">
+              <ion-item class="ion-no-padding">
+                <ion-label position="floating">Forma Pag</ion-label>
+                <ion-select interface="popover" formControlName='method' (ionChange)="loadtransactionToConfirm()">
+                  <ion-select-option value="">Todas</ion-select-option>
+                  <ion-select-option *ngFor="let item of methodList" [value]="item.value">{{item.name}}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col> -->
+            <!-- <ion-col size="6" size-sm="4" *ngIf="cashierPermissions.filterByEmployee">
+              <ion-item class="ion-no-padding">
+                <ion-label position="floating">Funcionario</ion-label>
+                <ion-select interface="popover" formControlName='employee' (ionChange)="filterCashier()">
+                  <ion-select-option value="">Todos</ion-select-option>
+                  <ion-select-option *ngFor="let item of employeeList" [value]="item">{{item}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col> -->
+
+          </ion-row>
+        </form>
+      </ion-card>
+    </ion-col>
+    <ion-col size="12" size-md='10'>
+      <ion-card class="ion-no-margin ion-margin-bottom">
+        <!-- <ion-row class="ion-justify-content-center icons-cashier">
+          <ion-col size="4" class="ion-text-center">
+            <div class="openClose" [ngClass]="!showInfoCashier? 'positionIconOpenClose':''">
+              <ion-icon class="pointer" (click)="showInfoCashier = !showInfoCashier" color="success" name="key-outline">
+              </ion-icon>
+              <div class="info-cashier" *ngIf="showInfoCashier">
+                <ion-card class="ion-no-margin">
+                  <ion-row class="ion-justify-content-center" *ngIf="cashierInitial">
+                    <ion-col size="12">
+                      <ion-card-title>Abertura - {{cashierInitial.date|date:'shortTime'}} Hs</ion-card-title>
+                    </ion-col>
+                    <ion-col size="12">
+                      <ion-card-title>Inicial - {{cashierInitial.initial | currency}}</ion-card-title>
+                    </ion-col>
+                    <ion-col size="12" class="ion-no-margin">
+                      <ion-button (click)="cashierClose()" fill="solid" color="danger" expand="block">
+                        Fechar Caixa
+                      </ion-button>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row *ngIf="!cashierInitial">
+                    <ion-col>
+                      <ion-button class="ion-margin-top" (click)="openCashier()" fill="solid" color="success"
+                        expand="block">
+                        Abrir Caixa
+                      </ion-button>
+                    </ion-col>
+                  </ion-row>
+                </ion-card>
+              </div>
+            </div>
+          </ion-col>
+          <ion-col size="4" class="ion-text-center" (click)="withdrawal()">
+            <ion-icon class="pointer" color="danger" name="cash-outline"></ion-icon>
+          </ion-col>
+          <ion-col size="4" class="ion-text-center" (click)="enableFilters()">
+            <ion-icon class="pointer" color="secondary" name="funnel-outline"></ion-icon>
+          </ion-col>
+        </ion-row> -->
+        <ion-list class="header-list">
+          <ion-item class="ion-no-margin ion-no-padding">
+            <ion-row>
+              <ion-label><strong>FORMA</strong></ion-label>
+              <div class='cahier-header-date'>
+                <ion-label><strong>DATA</strong></ion-label>
+              </div>
+              <div class="cahier-header-hour">
+                <ion-label><strong>HORA</strong></ion-label>
+              </div>
+              <ion-label><strong>FAVORECIDO</strong></ion-label>
+            </ion-row>
+            <div slot="end">
+              <ion-label><strong>VALOR</strong></ion-label>
+            </div>
+          </ion-item>
+          <ion-row *ngIf="confirmTransactionList.length===0">
+            <ion-col size="12">
+              <ion-text class="ion-text-center">
+                <h5><i>Nenhum registro encontrado</i></h5>
+              </ion-text>
+            </ion-col>
+          </ion-row>
+          <ion-item *ngFor="let item of confirmTransactionList" class="ion-no-margin ion-no-padding">
+            <ion-row>
+              <!--  <ion-icon *ngIf="methodsIcons[item.method]" size="large" [color]="methodsIcons[item.method].color"
+                [name]="methodsIcons[item.method].name">
+              </ion-icon>
+              <img *ngIf="!methodsIcons[item.method]" src="../../../assets/images/logo-pix.png"> -->
+
+              <div class="item-date">
+                <ion-label>{{item.expected| date: 'dd/MM/yyyy'}}</ion-label>
+              </div>
+            </ion-row>
+            <div slot="end">
+              <ion-label>
+                {{item.amount| currency:'BRL'}}
+              </ion-label>
+            </div>
+          </ion-item>
+        </ion-list>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-content>

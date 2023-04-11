@@ -1,0 +1,395 @@
+<app-admin-header title='Adicionar'></app-admin-header>
+<ion-content>
+  <ion-grid>
+    <ion-text class="ion-text-center">
+      <h2>Cadastro Permissões</h2>
+    </ion-text>
+    <ion-card class="ion-padding-horizontal">
+      <form [formGroup]="formulario">
+        <ion-row class="ion-justify-content-center ion-margin-bottom">
+          <ion-col size="12" size-sm="6" size-md="4">
+            <ion-item class="ion-no-padding">
+              <ion-label position="floating">Nome</ion-label>
+              <ion-input type="text" formControlName='name'></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row> 
+        <ion-row formGroupName='permissions'> 
+          <ion-col formGroupName="permission" size="12" size-sm="12" size-md="6">
+            <div class="colCheck"></div>
+            <ion-label><strong>Cadastro de Permissões, poderá?</strong></ion-label>
+            <ion-row class="checkbox">
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="r"></ion-checkbox>
+                  <ion-label>Acessar</ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="c"></ion-checkbox>
+                  <ion-label>Criar</ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="u"></ion-checkbox>
+                  <ion-label>Editar</ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="d"></ion-checkbox>
+                  <ion-label>Deletar</ion-label>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        <!--  <ion-col formGroupName="user" size="12" size-sm="12" size-md="6">
+            <div class="colCheck"></div>
+            <ion-label><strong>Cadastro de Funcionários, poderá?</strong></ion-label>
+            <ion-row class="checkbox">
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="r"></ion-checkbox>
+                  <ion-label>Acessar</ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="c"></ion-checkbox>
+                  <ion-label>Criar</ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="u"></ion-checkbox>
+                  <ion-label>Editar</ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="d"></ion-checkbox>
+                  <ion-label>Deletar</ion-label>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-col> -->
+        <ion-col formGroupName="supplier" size="12" size-sm="12" size-md="6">
+            <div class="colCheck"></div>
+            <ion-label><strong>Cadastro de Fornecedores, poderá?</strong></ion-label>
+            <ion-row class="checkbox">
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="r"></ion-checkbox>
+                  <ion-label>Acessar</ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="c"></ion-checkbox>
+                  <ion-label>Criar</ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="u"></ion-checkbox>
+                  <ion-label>Editar</ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="d"></ion-checkbox>
+                  <ion-label>Deletar</ion-label>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+          <!-- <ion-col formGroupName="cus" size="12" size-sm="12" size-md="6">
+            <div class="colCheck"></div>
+            <ion-label><strong>Cadastro de Clientes, poderá?</strong></ion-label>
+            <ion-row class="checkbox">
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="r"></ion-checkbox>
+                  <ion-label>Acessar</ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="c"></ion-checkbox>
+                  <ion-label>Criar</ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="u"></ion-checkbox>
+                  <ion-label>Editar</ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="d"></ion-checkbox>
+                  <ion-label>Deletar</ion-label>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-col> -->
+          <!-- <ion-col formGroupName="bra" size="12" size-sm="12" size-md="6">
+            <div class="colCheck"></div>
+            <ion-label><strong>Cadastro de Marcas, poderá?</strong></ion-label>
+            <ion-row class="checkbox">
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="r"></ion-checkbox>
+                  <ion-label>Acessar</ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="c"></ion-checkbox>
+                  <ion-label>Criar</ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="u"></ion-checkbox>
+                  <ion-label>Editar</ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="d"></ion-checkbox>
+                  <ion-label>Deletar</ion-label>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-col> -->
+          <ion-col formGroupName="category" size="12" size-sm="12" size-md="6">
+            <div class="colCheck"></div>
+            <ion-label><strong>Cadastro de Categorias, poderá?</strong></ion-label>
+            <ion-row class="checkbox">
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="r"></ion-checkbox>
+                  <ion-label>Acessar</ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="c"></ion-checkbox>
+                  <ion-label>Criar</ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="u"></ion-checkbox>
+                  <ion-label>Editar</ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="d"></ion-checkbox>
+                  <ion-label>Deletar</ion-label>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col formGroupName="product" size="12" size-sm="12" size-md="6">
+            <div class="colCheck"></div>
+            <ion-label><strong>Cadastro de Produtos, poderá?</strong></ion-label>
+            <ion-row class="checkbox">
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="r"></ion-checkbox>
+                  <ion-label>Acessar</ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="c"></ion-checkbox>
+                  <ion-label>Criar</ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="u"></ion-checkbox>
+                  <ion-label>Editar</ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="d"></ion-checkbox>
+                  <ion-label>Deletar</ion-label>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+         <ion-col formGroupName="account" size="12" size-sm="12" size-md="6">
+            <div class="colCheck"></div>
+            <ion-label><strong>Cadastro do plano de contas, poderá?</strong></ion-label>
+            <ion-row class="checkbox">
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="r"></ion-checkbox>
+                  <ion-label>Acessar</ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="c"></ion-checkbox>
+                  <ion-label>Criar</ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="u"></ion-checkbox>
+                  <ion-label>Editar</ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="d"></ion-checkbox>
+                  <ion-label>Deletar</ion-label>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+         <!--  <ion-col formGroupName="car" size="12" size-sm="12" size-md="6">
+            <div class="colCheck"></div>
+            <ion-label><strong>Cadastro de Cartões, poderá?</strong></ion-label>
+            <ion-row class="checkbox">
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="r"></ion-checkbox>
+                  <ion-label>Acessar</ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="c"></ion-checkbox>
+                  <ion-label>Criar</ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="u"></ion-checkbox>
+                  <ion-label>Editar</ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="d"></ion-checkbox>
+                  <ion-label>Deletar</ion-label>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-col> -->
+          <!-- <ion-col formGroupName="sal" size="12" size-sm="12" size-md="6">
+            <div class="colCheck"></div>
+            <ion-label><strong>Na tela de Venda, poderá?</strong></ion-label>
+            <ion-row class="checkbox">
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="r"></ion-checkbox>
+                  <ion-label>Acessar</ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="c"></ion-checkbox>
+                  <ion-label>Vender</ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="u"></ion-checkbox>
+                  <ion-label>Modificar</ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="d"></ion-checkbox>
+                  <ion-label>Deletar</ion-label>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-col> -->
+          <!-- <ion-col formGroupName="bil" size="12" size-sm="12" size-md="6">
+            <div class="colCheck"></div>
+            <ion-label><strong>Na tela de Contas, poderá?</strong></ion-label>
+            <ion-row class="checkbox">
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="r"></ion-checkbox>
+                  <ion-label>Acessar</ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="c"></ion-checkbox>
+                  <ion-label>Lançar</ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="u"></ion-checkbox>
+                  <ion-label>Modificar</ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="d"></ion-checkbox>
+                  <ion-label>Deletar</ion-label>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-col> -->
+         <!--  <ion-col formGroupName="cco" size="12" size-sm="12" size-md="6">
+            <div class="colCheck"></div>
+            <ion-label><strong>Na tela de Operadoras Cartão, poderá?</strong></ion-label>
+            <ion-row class="checkbox">
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="r"></ion-checkbox>
+                  <ion-label>Acessar</ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="c"></ion-checkbox>
+                  <ion-label>Lançar</ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="u"></ion-checkbox>
+                  <ion-label>Modificar</ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-no-margin" size="6" size-sm="3">
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-checkbox formControlName="d"></ion-checkbox>
+                  <ion-label>Deletar</ion-label>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-col> -->
+        </ion-row> 
+      </form>
+     
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="6" size-sm="4" class="ion-padding-top">
+          <ion-button color="light" expand="block" routerLink='/admin/permissoes'>
+            Voltar
+          </ion-button>
+        </ion-col>
+        <ion-col size="6" size-sm="4" class="ion-padding-top">
+          <ion-button expand="block" [disabled]='formulario.invalid' (click)="submit()">
+            Salvar
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </ion-grid>
+</ion-content>

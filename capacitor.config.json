@@ -1,0 +1,8 @@
+{
+  "appId": "com.example.app",
+  "appName": "Moda Mix",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "cordova": {}
+}

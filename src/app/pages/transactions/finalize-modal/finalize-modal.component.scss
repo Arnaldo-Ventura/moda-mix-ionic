@@ -1,0 +1,45 @@
+ion-item {
+  --border-radius: 10px;
+}
+
+.input-radio {
+  position: relative;
+}
+
+.group-radio {
+  position: absolute;
+  top: 25px;
+  width: 99.9%;
+  z-index: 2;
+  ion-item {
+    --border-radius: 0;
+  }
+  ion-list {
+    border-radius: 0 0 10px 10px;
+  }
+}
+
+img {
+  max-height: 30px;
+}
+
+.pays-method {
+  background-color: white;
+  min-height: 40vh;
+  width: 100%;
+  border-radius: 10px;
+  display: block;
+  overflow: auto;
+  color: black;
+  margin: 10px 7px;
+  ion-item-divider {
+    padding: 4px 2px;
+  }
+}
+.pays-method::-webkit-scrollbar {
+  display: none;
+}
+.pays-method {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}

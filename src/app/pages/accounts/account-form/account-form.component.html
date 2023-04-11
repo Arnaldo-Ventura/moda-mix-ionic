@@ -1,0 +1,47 @@
+<app-admin-header title='Adicionar'></app-admin-header>
+<ion-content>
+  <ion-grid>
+    
+    <ion-text class="ion-text-center ion-no-margin">
+      <h2>Cadastro de Plano de Contas</h2>
+    </ion-text>
+
+    <form [formGroup]="formulario">
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="12" size-sm="7" size-md="4" class="ion-padding-horizontal">
+          <ion-item class="ion-no-padding">
+            <ion-label position="floating">Nome</ion-label>
+            <ion-input type="text" formControlName='name'></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12" size-sm="5" size-md="4" class="ion-padding-horizontal">
+          <ion-item>
+            <ion-label position="floating">Tipo</ion-label>
+            <ion-select multiple="true" interface="alert" formControlName='type'>
+              <ion-select-option *ngFor="let item of typeList" [value]="item.value">{{item.name}}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12" size-sm="3" size-md="2" class="ion-padding-horizontal">
+          <ion-item lines="none">
+            <ion-label>Ativa</ion-label>
+            <ion-checkbox formControlName='active'></ion-checkbox>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </form>
+    <ion-row class="ion-justify-content-center ion-padding-horizontal">
+      <ion-col size="6" size-sm="4" class="ion-padding-top">
+        <ion-button color="light" expand="block" (click)='back()'>
+          Voltar
+        </ion-button>
+      </ion-col>
+      <ion-col size="6" size-sm="4" class="ion-padding-top">
+        <ion-button expand="block" [disabled]='formulario.invalid' (click)="submit()">
+          Salvar
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

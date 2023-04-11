@@ -1,0 +1,24 @@
+<ion-content>
+  <ion-grid>
+    <ion-text>
+      <h1 class="ion-text-center"><strong>Confirme</strong></h1>
+    </ion-text>
+    <ion-text class="ion-text-center">
+      <h6>{{title}}</h6>
+    </ion-text>
+    <ion-row class="action-buttons ion-align-self-end">
+      <ion-col size="6">
+        <ion-button color="light" expand="block" (click)="onDismissis()">
+          <ion-icon slot="start" name="ban-outline"></ion-icon>
+          Cancelar
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button color="light" expand="block" (click)="onDismissis(true)">
+          OK
+          <ion-icon slot="end" name="checkmark-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

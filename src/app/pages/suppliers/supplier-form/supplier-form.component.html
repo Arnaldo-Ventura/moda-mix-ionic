@@ -1,0 +1,51 @@
+<app-admin-header title='Adicionar' *ngIf="!isModal"></app-admin-header>
+<ion-header *ngIf="isModal">
+  <ion-toolbar>
+    <ion-title>
+      Adicionar Fornecedor
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)='onDismiss()'>
+        <ion-icon name="close-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+<ion-content padding>
+  <ion-grid>
+    <ion-text class="ion-text-center">
+      <h2>Cadastro Fornecedores</h2>
+    </ion-text>
+    <ion-card class="ion-padding">
+      <form [formGroup]="formulario">
+        <ion-row class="ion-justify-content-center">
+          <ion-col size="12" size-sm="12" size-md="6">
+            <ion-item class="ion-no-padding">
+              <ion-label position="floating">Nome</ion-label>
+              <ion-input type="text" formControlName='name'></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12" size-sm="12" size-md="4">
+            <ion-item class="ion-no-padding" lines='none'>
+              <ion-label>Ativo</ion-label>
+              <ion-checkbox formControlName='active'></ion-checkbox>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </form>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="6" size-sm="4" class="ion-padding-top">
+          <ion-button color="light" expand="block" routerLink='/admin/fornecedores'>
+            Voltar
+          </ion-button>
+        </ion-col>
+        <ion-col size="6" size-sm="4" class="ion-padding-top">
+          <ion-button expand="block" [disabled]='formulario.invalid' (click)="submit()">
+            Salvar
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </ion-grid>
+</ion-content>

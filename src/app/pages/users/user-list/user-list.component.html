@@ -1,0 +1,48 @@
+<app-admin-header title="Funcionários"></app-admin-header>
+<ion-toolbar color='primary' class="ion-hide-sm-up ion-no-border">
+  <form [formGroup]='form'>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" size-sm='3'>
+        <ion-searchbar formControlName='pesq' animated placeholder="Buscar" color='light'
+          clear-icon="close-circle-outline" (ionClear)="reloadUsers()" (ionChange)="onInput($event)"></ion-searchbar>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-toolbar>
+<ion-content>
+  <ion-grid fixed>
+    <ion-row class="ion-justify-content-center ion-align-items-end ion-no-margin ion-no-padding">
+      <ion-col class="ion-align-self-end ion-text-center" size="12" size-sm="4" size-md='3'>
+        <ion-button (click)="userForm()">
+          <ion-icon name="add"></ion-icon>Funcionário
+        </ion-button>
+      </ion-col>
+      <ion-col size="10" size-sm="6" size-md='5' class="ion-hide-sm-down">
+        <form [formGroup]='form'>
+          <ion-item>
+            <ion-label position="floating">Buscar</ion-label>
+            <ion-input type="text" #pesqInput formControlName='pesq' (input)='onInput($event)'></ion-input>
+            <ion-icon *ngIf="pesqInput.value" class="pointer" size='small' class="ion-align-self-end" slot='end'
+              name="close-outline" (click)="reloadUsers()"></ion-icon>
+          </ion-item>
+        </form>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" size-sm='12' size-md='9' size-lg='8'>
+        <ion-list>
+          <ion-item *ngFor="let item of userList">            
+            <ion-label>{{item.name}}</ion-label>
+            <ion-icon color='dark' class="pointer" slot='small' slot="end" name="ellipsis-vertical-outline"
+              (click)='selecionOption(item._id)'></ion-icon>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadScrollData()">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Carregando mais funcionários...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
